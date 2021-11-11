@@ -19,8 +19,8 @@
 
 public class RingBuffer {
     // YOUR INSTANCE VARIABLES HERE
-	private int[] ring;
-	int frnt,back;
+	private double[] ring;
+	int frnt,back,size;
     // You are creating a circular queue.
     // Look up how to create a cirucular queue using an array.
 
@@ -29,9 +29,14 @@ public class RingBuffer {
     // creates an empty ring buffer with the specified capacity
     public RingBuffer(int capacity) {
         // YOUR CODE HERE
-    	ring = new int[capacity];
-    	frnt= 0;
-    	back= 0 ;
+    	ring = new double[capacity];
+    	for(int i=0;i<ring.length;i++)
+    	{
+    		ring[i]=Double.MIN_VALUE;
+    	}
+    	size=capacity
+    	frnt= -1;
+    	back= -1;
     }
 
     // return the capacity of this ring buffer
@@ -44,10 +49,10 @@ public class RingBuffer {
     public int size() {
         // YOUR CODE HERE
     	int temp=0;
-    	for(int i=0;i<ring.length;i++)
+    	for(int i=frnt;i<back;i++)
     	{
-    		if(ring[i]!=0)
-    			temp++;
+    		temp++;
+    		if(i==)
     	}
     	return temp;
     }
@@ -71,24 +76,37 @@ public class RingBuffer {
     	{
     		return;
     	}
-    	if(back+1 == size() && frnt!=0)
+    	if(size()==0)
     	{
-    		
+    		frnt=0;
+    		back=0;
+    		ring[0]=x;
     	}
-    	
+    	else if(back+1 == size() && frnt!=0)
+    	{
+    		back=0;
+    		ring[0]=x;
+    	}
+    	else
+    	{
+    		back++;
+    		ring[back+1]=x;
+    	}
     }
 
     // deletes and returns the item at the front of this ring buffer
     public double dequeue() {
-        // YOUR CODE HERE
-    	return 0.0;
+    	double temp = ring[frnt];
+    	ring[frnt]=0.0;
+    	return ring[frnt];
     }
 
     // returns the item at the front of this ring buffer
     public double peek() {
         // YOUR CODE HERE
-    	return 0.0;
+    	return ring[frnt];
     }
+   
 
     // tests and calls every instance method in this class
     public static void main(String[] args) {
