@@ -97,8 +97,8 @@ public class RingBuffer {
     // deletes and returns the item at the front of this ring buffer
     public double dequeue() {
     	double temp = ring[frnt];
-    	ring[frnt]=0.0;
-    	return ring[frnt];
+    	ring[frnt]=Double.MIN_VALUE;
+    	return temp;
     }
 
     // returns the item at the front of this ring buffer
