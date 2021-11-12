@@ -20,7 +20,7 @@
 public class RingBuffer {
     // YOUR INSTANCE VARIABLES HERE
 	private double[] ring;
-	int frnt,back,size;
+	int frnt,back,sizef,size;
     // You are creating a circular queue.
     // Look up how to create a cirucular queue using an array.
 
@@ -30,13 +30,11 @@ public class RingBuffer {
     public RingBuffer(int capacity) {
         // YOUR CODE HERE
     	ring = new double[capacity];
-    	for(int i=0;i<ring.length;i++)
-    	{
-    		ring[i]=Double.MIN_VALUE;
-    	}
-    	size=capacity
-    	frnt= -1;
-    	back= -1;
+    	
+    	size=capacity;
+    	frnt= 0;
+    	back= 0;
+    	sizef=0;
     }
 
     // return the capacity of this ring buffer
@@ -48,13 +46,7 @@ public class RingBuffer {
     // return number of items currently in this ring buffer
     public int size() {
         // YOUR CODE HERE
-    	int temp=0;
-    	for(int i=frnt;i<back;i++)
-    	{
-    		temp++;
-    		if(i==)
-    	}
-    	return temp;
+    	return sizef;
     }
 
     // is this ring buffer empty (size equals zero)?
@@ -76,29 +68,25 @@ public class RingBuffer {
     	{
     		return;
     	}
-    	if(size()==0)
-    	{
-    		frnt=0;
-    		back=0;
-    		ring[0]=x;
-    	}
-    	else if(back+1 == size() && frnt!=0)
+    	if(back==size)
     	{
     		back=0;
-    		ring[0]=x;
     	}
-    	else
-    	{
-    		back++;
-    		ring[back+1]=x;
-    	}
+    	ring[back]=x;
+    	
+    	back++;		
+    	sizef++;
+    	
     }
 
     // deletes and returns the item at the front of this ring buffer
     public double dequeue() {
     	double temp = ring[frnt];
     	ring[frnt]=Double.MIN_VALUE;
+    	sizef=sizef-1;
+    	frnt++;
     	return temp;
+    	
     }
 
     // returns the item at the front of this ring buffer
@@ -106,12 +94,38 @@ public class RingBuffer {
         // YOUR CODE HERE
     	return ring[frnt];
     }
-   
-
-    // tests and calls every instance method in this class
-    public static void main(String[] args) {
-        // YOUR CODE HERE
+    
+    public String toString()
+    {
+    	System.out.println(frnt);
+    	System.out.println(back);
+    	for(int i=0;i<size;i++)
+    	{
+    		System.out.println(ring[i]);
+    	}
+    	String temp="[";
+    	for(int i=frnt;i!=back||size=;i++)
+    	{
+    		
+    		if(i==size)
+    		{
+    			i=0;
+    		}
+    		if(i==back-1){
+    			temp+=ring[i];
+    		}
+    		else
+    		{
+    			temp+=ring[i] +", ";
+    			
+    		}
+    		
+    		
+    	}
+    	temp+="]";
+    	return temp;
     }
 
-}
+    
 
+}
