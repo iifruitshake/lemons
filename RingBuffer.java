@@ -97,14 +97,10 @@ public class RingBuffer {
     
     public String toString()
     {
-    	System.out.println(frnt);
-    	System.out.println(back);
-    	for(int i=0;i<size;i++)
-    	{
-    		System.out.println(ring[i]);
-    	}
+    	
     	String temp="[";
-    	for(int i=frnt;i!=back||size=;i++)
+    	int temp1=sizef;
+    	for(int i=frnt;i!=back||temp1!=0;i++)
     	{
     		
     		if(i==size)
@@ -117,9 +113,8 @@ public class RingBuffer {
     		else
     		{
     			temp+=ring[i] +", ";
-    			
     		}
-    		
+    		temp1=temp1-1;
     		
     	}
     	temp+="]";
