@@ -41,37 +41,37 @@ public class RingBuffer {
     public int capacity() {
         // YOUR CODE HERE
     	return ring.length;
+    	
     }
 
     // return number of items currently in this ring buffer
     public int size() {
         // YOUR CODE HERE
     	return sizef;
+    	
     }
 
     // is this ring buffer empty (size equals zero)?
     public boolean isEmpty() {
         // YOUR CODE HERE
     	return size() == 0;
+    	
     }
 
     // is this ring buffer full (size equals capacity)?
     public boolean isFull() {
         // YOUR CODE HERE
     	return size() == capacity();
+    	
     }
 
     // adds item x to the end of this ring buffer
     public void enqueue(double x) {
         // YOUR CODE HERE
     	if(isFull())
-    	{
     		return;
-    	}
     	if(back==size)
-    	{
     		back=0;
-    	}
     	ring[back]=x;
     	
     	back++;		
@@ -81,6 +81,8 @@ public class RingBuffer {
 
     // deletes and returns the item at the front of this ring buffer
     public double dequeue() {
+    	if(frnt == ring.length)
+    		frnt = 0;
     	double temp = ring[frnt];
     	ring[frnt]=Double.MIN_VALUE;
     	sizef=sizef-1;
