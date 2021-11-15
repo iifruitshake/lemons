@@ -33,8 +33,14 @@ public class GuitarString {
 
     // creates a guitar string whose size and initial values are given by
     // the specified array
-    public GuitarString(double[] init) {
+   public GuitarString(double[] init) {
         // YOUR CODE HERE
+    	ring = new RingBuffer(init.length);
+    	for(double x:init)
+    	{
+    		ring.enqueue(x);
+    	}
+    	rsize=init.length;
     }
 
     // returns the number of samples in the ring buffer
@@ -46,6 +52,19 @@ public class GuitarString {
     // plucks the guitar string (by replacing the buffer with white noise)
     public void pluck() {
         // YOUR CODE HERE
+    	int temp=ring.size();
+    	for(int i=0;i<ring.capacity();i++)
+    	{
+    		if(temp>0)
+    		{
+    			ring.dequeue();
+    			ring.enqueue(Math.random()-.5);
+    		}
+    		else
+    		{
+    			ring.enqueue(Math.random()-.5);
+    		}
+    	}
     }
 
     // advances the Karplus-Strong simulation one time step
@@ -69,9 +88,6 @@ public class GuitarString {
     }
     
 
-    // tests and calls every constructor and instance method in this class
-    public static void main(String[] args) {
-        // YOUR CODE HERE
-    }
+    
 
 }
