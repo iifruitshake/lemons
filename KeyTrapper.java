@@ -7,10 +7,19 @@ import java.awt.event.*;
 public class KeyTrapper extends Canvas implements KeyListener
 {
 	private String key;
-	
+	private Map<String,GuitarString> note;
 		//this is the constructor
 	public KeyTrapper( )
 	{	
+		note= new HashMap<String,GuitarString>();
+		String keyboard = "q2we4r5ty7u8i9op-[=zxdcfvgbnjmk,.;/' ";
+		String[] temp = keyboard.split("",0);
+		for(int i=0;i<37;i++)
+		{
+			note.put(temp[i],new GuitarString(440*Math.pow(1.05956, i-24)));
+		}
+		
+		
 		key = "NO VALUE YET";
 		addKeyListener( this );
 		setFocusable( true );
