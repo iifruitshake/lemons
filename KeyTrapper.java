@@ -37,30 +37,20 @@ public class KeyTrapper extends Canvas implements KeyListener
 	
 	public void keyTyped(KeyEvent e)
 	{
-		if( e.getKeyCode()  == KeyEvent.VK_SPACE )
+		key=  ""+e.getKeyChar();
+		GuitarString f = note.get(key);
+		f.pluck();
+		for(int i=0;i<30000;i++)
 		{
-			key = "Key pressed " + e.getKeyCode();
-			repaint();
+			double x = f.sample();
+			StdAudio.play(x);
+			f.tic();
 		}
-		if( e.getKeyCode()  == KeyEvent.VK_X )
-		{
-			key = "Key pressed " + e.getKeyCode();
-			repaint();
-		}				
+		
 	}
 		
 	public void keyPressed(KeyEvent e)
-	{
-		if( e.getKeyCode()  == KeyEvent.VK_SPACE )
-		{
-			key = "Key pressed " + e.getKeyCode();
-			repaint();
-		}
-		if( e.getKeyCode()  == KeyEvent.VK_X )
-		{
-			key = "Key pressed " + e.getKeyCode();
-			repaint();
-		}					
+	{			
 	}
 				
 	public void keyReleased(KeyEvent e)
